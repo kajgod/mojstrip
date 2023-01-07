@@ -1,8 +1,10 @@
+import classnames from "classnames";
 import Head from "next/head";
-import useDarkMode from "../svc/service";
+import { useDarkMode } from "../svc/service";
 
 export default function Home() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
+  console.log("indeX", colorMode);
   return (
     <>
       <Head>
@@ -11,10 +13,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={isDarkMode ? "dark" : undefined}>
+      <div
+        id="mojstrip"
+        className={classnames(colorMode, isMounted && "loaded")}
+      >
         <h1>Hello World</h1>
         <button onClick={toggleDarkMode}>Dark mode</button>
-      </main>
+      </div>
     </>
   );
 }

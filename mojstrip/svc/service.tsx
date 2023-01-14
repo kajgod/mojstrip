@@ -2,11 +2,8 @@ import { useState, useEffect } from "react";
 import { setSingleDataLine, getSingleDataLine } from "./user";
 
 export function useDarkMode() {
-  console.log("getSignleDataLine", getSingleDataLine("colorMode"));
   const [colorMode, setColorMode] = useState(getSingleDataLine("colorMode"));
   const [isMounted, setIsMounted] = useState(false);
-
-  console.log("service!", colorMode);
 
   const setAndStoreColorMode = (mode: string) => {
     setSingleDataLine("colorMode", mode);
@@ -29,7 +26,7 @@ export function useDarkMode() {
     }
     // show page
     setIsMounted(true);
-  }, []);
+  }, [colorMode]);
 
   const toggleDarkMode = () =>
     ["dark", ""].includes(colorMode)

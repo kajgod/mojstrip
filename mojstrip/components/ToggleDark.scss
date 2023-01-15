@@ -1,5 +1,7 @@
 .toggle-dark {
-  width: 40px;
+  --toggler-calculated: calc(var(--toggler-height) - 4px);
+  margin-left: 1rem;
+  width: var(--toggler-width);
   display: block;
   .hidden {
     clip: rect(0 0 0 0);
@@ -10,31 +12,31 @@
     width: 1px;
   }
   .toggle {
-    height: 24px;
-    width: 40px;
+    height: var(--toggler-height);
+    width: var(--toggler-width);
     background: var(--black);
-    border-radius: 12px;
-    padding: 4px;
+    border-radius: calc(var(--toggler-height) / 2);
+    padding: 2px 4px;
     position: relative;
     margin: auto;
     cursor: pointer;
     &::before {
       content: "";
       display: block;
-      height: 16px;
-      width: 16px;
-      border-radius: 8px;
+      height: var(--toggler-calculated);
+      width: var(--toggler-calculated);
+      border-radius: 50%;
       background: var(--white);
       position: absolute;
       z-index: 2;
       transform: translate3d(0, 0, 0);
-      transition: transform 150ms ease-in-out;
+      transition: transform var(--animation-duration) ease-in-out;
     }
     &.enabled {
       color: var(--black);
       background-color: var(--background-color);
       &::before {
-        transform: translate3d(16px, 0, 0);
+        transform: translate3d(var(--toggler-calculated), 0, 0);
       }
     }
     input {

@@ -22,6 +22,7 @@ export default function Home() {
           Toggler={ToggleDark}
           colorMode={colorMode}
           toggleDarkMode={toggleDarkMode}
+          isMounted={isMounted}
         />
       </div>
     </>

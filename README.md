@@ -1,2 +1,1 @@
 # mojstrip
-testing

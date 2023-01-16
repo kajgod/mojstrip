@@ -45,4 +45,11 @@
       opacity: 0;
     }
   }
+  @media (max-width: $mobile) {
+    .toggle {
+      &.enabled {
+        background-color: var(--black);
+      }
+    }
+  }
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import classnames from "classnames";
 import { IToggleDark } from "./ToggleDark";
+import Hamburger from "./Hamburger";
 
 interface INavigation {
   Toggler: ({ colorMode, toggleDarkMode }: IToggleDark) => JSX.Element;
@@ -9,27 +10,6 @@ interface INavigation {
   toggleDarkMode: () => void;
   isMounted: boolean;
 }
-
-const NavToggler = ({
-  isOpen,
-  setOpen,
-}: {
-  isOpen: boolean;
-  setOpen: (isOpen: boolean) => void;
-}) => {
-  return (
-    <div className="open">
-      <button onClick={() => setOpen(!isOpen)}>
-        <div id="nav-animacija" className={isOpen ? "active" : ""}>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-    </div>
-  );
-};
 
 const Navigation = ({
   Toggler,
@@ -60,7 +40,7 @@ const Navigation = ({
             )}
           </li>
         </ul>
-        <NavToggler isOpen={isOpen} setOpen={setOpen} />
+        <Hamburger isOpen={isOpen} setOpen={setOpen} />
       </nav>
     </div>
   );

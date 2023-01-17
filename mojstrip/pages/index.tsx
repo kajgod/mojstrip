@@ -3,9 +3,15 @@ import Head from "next/head";
 import Navigation from "../components/Navigation";
 import ToggleDark from "../components/ToggleDark";
 import { useDarkMode } from "../svc/service";
+import { setEnvironment } from "../lib/settings";
 
-export default function Home() {
+interface IInitialProps {
+  env: string;
+}
+
+export default function Home({ env }: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
+  setEnvironment(env);
   return (
     <>
       <Head>

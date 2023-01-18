@@ -12,9 +12,6 @@ export const setEnvironment = (env: string) => {
     case "development":
       settings.imagesServer = DEV_IMAGE_CDN;
       break;
-    case "production":
-      settings.imagesServer = PROD_IMAGE_CDN;
-      break;
     default:
       settings.imagesServer = PROD_IMAGE_CDN;
       break;

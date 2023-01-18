@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "MojStrip #1",
+    "comics": [
+      {
+        "id": 1,
+        "title": "Perspektiva",
+        "author": "Darko Macan",
+        "pages": [
+          "/2-1/perspektiva-01.jpg",
+          "/2-1/perspektiva-02.jpg",
+          "/2-1/perspektiva-03.jpg",
+          "/2-1/perspektiva-04.jpg",
+          "/2-1/perspektiva-05.jpg",
+          "/2-1/perspektiva-06.jpg",
+          "/2-1/perspektiva-07.jpg",
+          "/2-1/perspektiva-08.jpg",
+          "/2-1/perspektiva-09.jpg",
+          "/2-1/perspektiva-10.jpg"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Ironija",
+        "author": "Jurica Starešinčić",
+        "pages": [
+          "/1-1/pajo001.gif",
+          "/1-1/pajo002.gif",
+          "/1-1/pajo003.gif",
+          "/1-1/pajo004.gif",
+          "/1-1/pajo005.gif",
+          "/1-1/pajo006.gif"
+        ]
+      }
+    ]
+  }
+]

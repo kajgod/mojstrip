@@ -6,7 +6,8 @@ $black: #000;
 $white: #fff;
 
 @mixin light-theme {
-  --page-background-color: linear-gradient(0deg, #f7f7f7, #f3f3f3);
+  --page-background-color: #{$white};
+  --comic-page-background-color: transparent;
   --background-color: #{$light};
   --foreground-color: #{$dark};
   --highlight-color: #{$highlight};
@@ -14,6 +15,7 @@ $white: #fff;
 
 @mixin dark-theme {
   --page-background-color: linear-gradient(0deg, #1e2026, #141518);
+  --comic-page-background-color: #{$white};
   --background-color: #{$dark};
   --foreground-color: #{$light};
   --highlight-color: #{$highlight};
@@ -28,6 +30,8 @@ $white: #fff;
   --dark: #{$dark};
   --light: #{$light};
   --page-width: 1024px;
+  --default-margin: 1rem;
+  --default-padding: 1rem;
   --nav-height: 4rem;
   --toggler-height: 1.2rem;
   --toggler-width: 2.4rem;
@@ -98,3 +102,4 @@ a {
 @import "../components/Navigation.scss";
 @import "../components/ToggleDark.scss";
 @import "../components/Hamburger.scss";
+@import "../components/Episode.scss";

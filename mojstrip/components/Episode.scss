@@ -1,0 +1,16 @@
+.episode {
+  width: min-content;
+  &.default {
+    margin: var(--nav-height) auto var(--default-margin);
+    max-width: var(--page-width);
+    .comic-page {
+      background: var(--comic-page-background-color);
+      img {
+        display: block;
+        height: calc(100vh - var(--nav-height));
+        width: auto;
+        margin: auto;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ const PROD_IMAGE_CDN = "https://cdn.example.com";
 
 const settings = {
   imagesServer: "",
+  vieswStyle: "default",
 };
 
 // methods
@@ -17,3 +18,7 @@ export const setEnvironment = (env: string) => {
       break;
   }
 };
+
+export const getImagesCDN = () => settings.imagesServer;
+
+export const getComicViewStyle = () => settings.vieswStyle;

@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import classnames from "classnames";
 import { getEpisode, IEpisode, IComic } from "../svc/episodes";
-import { getImagesCDN, getComicViewStyle } from "../lib/settings";
+import {
+  getImagesCDN,
+  getComicViewStyle,
+  getDefaultComicWidth,
+} from "../lib/settings";
+import { getMaxWidth } from "../lib/comics";
 
 interface IComicProps extends IComic {
   server: string;
+  maxWidth: number;
 }
 
 interface IPageProps {
@@ -54,30 +60,45 @@ const TitleAndPreface = ({
   title,
   cover,
   description,
-}: ITitleAndPrefaceProps) => (
-  <div className="preface">
-    <div className="cover">
-      <img className="cover-image" src={cover} alt={title} />
-      <h1>{title}</h1>
-    </div>
-    <p>{description}</p>
-  </div>
-);
+}: ITitleAndPrefaceProps) => {
+  const html = {
+    __html: `
+      <div class="cover">
+        <img class="cover-image" src="${cover}" alt="${title}" />
+        <h1>${title}</h1>
+      </div>
+      <p>${description}</p>
+   `,
+  };
+  return <div className="preface" dangerouslySetInnerHTML={html} />;
+};
 
 const Episode = ({ id }: { id?: number }) => {
   const [episode, setEpisode] = useState<IEpisode | null>(null);
+  const [maxWidth, setMaxWidth] = useState<number>(getDefaultComicWidth());
   useEffect(() => {
     (async () => {
       const episode = await getEpisode(id);
       setEpisode(episode);
+      const maxWidth = getMaxWidth(episode);
+      setMaxWidth(maxWidth);
     })();
   }, [id]);
   const server = getImagesCDN();
   return (
-    <div className={classnames("episode", getComicViewStyle())}>
-      <h1>{episode?.title ?? ""}</h1>
+    <div
+      className={classnames("episode", getComicViewStyle())}
+      style={{ width: maxWidth }}
+    >
+      {episode && (
+        <TitleAndPreface
+          title={episode.title}
+          cover={episode.cover}
+          description={episode.description}
+        />
+      )}
       {episode?.comics.map((comic) => (
-        <Comic key={comic.id} {...comic} server={server} />
+        <Comic key={comic.id} {...comic} maxWidth={maxWidth} server={server} />
       ))}
     </div>
   );

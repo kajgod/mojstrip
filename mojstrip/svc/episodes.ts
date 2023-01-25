@@ -21,6 +21,9 @@ export interface IComic {
 export interface IEpisode {
   id: number;
   title: string;
+  cover: string;
+  date: string;
+  description: string;
   comics: IComic[];
 }
 
@@ -33,6 +36,5 @@ export const getEpisode = async (
   id: number = episodes.length
 ): Promise<IEpisode> => {
   const episode = await import(`../data/episodes/${id}.json`);
-  console.log("episode", episode);
   return episode;
 };

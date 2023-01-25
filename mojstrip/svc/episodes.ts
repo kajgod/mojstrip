@@ -24,13 +24,15 @@ export interface IEpisode {
   comics: IComic[];
 }
 
-const ep = episodes as IEpisode[];
-
 /**
  * Get issue (episode) by number, and default tu most recent issue
  * @param id
  * @returns IEpisode
  */
-export const getEpisode = (id: number = episodes.length): IEpisode => {
-  return ep.find((episode) => episode.id === id) as IEpisode;;
+export const getEpisode = async (
+  id: number = episodes.length
+): Promise<IEpisode> => {
+  const episode = await import(`../data/episodes/${id}.json`);
+  console.log("episode", episode);
+  return episode;
 };

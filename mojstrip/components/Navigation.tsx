@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import classnames from "classnames";
+import { useHideNavigation } from "../svc/service";
 import { IToggleDark } from "./ToggleDark";
 import Hamburger from "./Hamburger";
 
@@ -18,8 +19,9 @@ const Navigation = ({
   isMounted,
 }: INavigation) => {
   const [isOpen, setOpen] = useState(false);
+  const shouldDisplayClass = useHideNavigation();
   return (
-    <div className="navigation">
+    <div className={classnames("navigation", shouldDisplayClass)}>
       <nav className="container">
         <div className="logo">
           <Link href="/">MojStrip</Link>

@@ -9,6 +9,9 @@
   z-index: 100;
   font-family: Montserrat, sans-serif;
   transition: transform var(--animation-duration) ease-in;
+  &.hide {
+    transform: translate3d(0, calc(-1 * var(--nav-height)), 0);
+  }
   nav {
     height: var(--nav-height);
     display: flex;

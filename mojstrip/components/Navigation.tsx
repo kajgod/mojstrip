@@ -19,9 +19,9 @@ const Navigation = ({
   isMounted,
 }: INavigation) => {
   const [isOpen, setOpen] = useState(false);
-  const shouldDisplayClass = useHideNavigation();
+  const { visibilityClass, activitiyClass } = useHideNavigation();
   return (
-    <div className={classnames("navigation", shouldDisplayClass)}>
+    <div className={classnames("navigation", visibilityClass, activitiyClass)}>
       <nav className="container">
         <div className="logo">
           <Link href="/">MojStrip</Link>

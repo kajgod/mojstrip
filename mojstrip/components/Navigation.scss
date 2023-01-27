@@ -8,10 +8,8 @@
   box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.1);
   z-index: 100;
   font-family: Montserrat, sans-serif;
-  transition: transform var(--animation-duration) ease-in;
-  &.hide {
-    transform: translate3d(0, calc(-1 * var(--nav-height)), 0);
-  }
+  transition: transform var(--animation-long-duration) ease-in,
+    opacity var(--animation-long-duration) ease-in;
   nav {
     height: var(--nav-height);
     display: flex;
@@ -42,8 +40,18 @@
       }
     }
   }
-  &.hidden {
+  &.initial {
+    opacity: 1;
+  }
+  &.hide {
     transform: translate3d(0, calc(-1 * var(--nav-height)), 0);
+    opacity: 1;
+  }
+  &.inactive {
+    opacity: 0.25;
+    &:hover {
+      opacity: 1;
+    }
   }
   .open {
     display: none;
@@ -60,6 +68,9 @@
   .navigation {
     --mobile-nav-element-height: 2.4rem;
     --mobile-nav-padding: 1.5rem;
+    &.inactive {
+      opacity: 1;
+    }
     nav {
       .nav-links {
         position: fixed;

@@ -5,15 +5,30 @@ const DEFAULT_COMIC_WIDTH = 900;
 //#region navigation
 const DEBOUNCE_SCROLL = 25;
 const ALWAYS_SHOW_AREA = 500;
+const TRANSPARENT_NAV_TIMEOUT = 2000;
 //#endregion
 
-const settings = {
+export interface INavigationConsts {
+  debounceScroll: number;
+  alwaysShowArea: number;
+  transparentNavTimeout: number;
+}
+
+export interface ISettings {
+  imagesServer: string;
+  viewStyle: string;
+  defaultComicWidth: number;
+  navigation: INavigationConsts;
+}
+
+const settings: ISettings = {
   imagesServer: "",
-  vieswStyle: "default",
+  viewStyle: "default",
   defaultComicWidth: DEFAULT_COMIC_WIDTH,
   navigation: {
     debounceScroll: DEBOUNCE_SCROLL,
     alwaysShowArea: ALWAYS_SHOW_AREA,
+    transparentNavTimeout: TRANSPARENT_NAV_TIMEOUT,
   },
 };
 
@@ -31,12 +46,8 @@ export const setEnvironment = (env: string) => {
 
 export const getImagesCDN = () => settings.imagesServer;
 
-export const getComicViewStyle = () => settings.vieswStyle;
+export const getComicViewStyle = () => settings.viewStyle;
 
 export const getDefaultComicWidth = () => settings.defaultComicWidth;
 
-interface INavigationConsts {
-  debounceScroll: number;
-  alwaysShowArea: number;
-}
 export const getNavigationConsts = (): INavigationConsts => settings.navigation;

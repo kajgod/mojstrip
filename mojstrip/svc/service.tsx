@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { setSingleDataLine, getSingleDataLine } from "./user";
 import { debounce } from "../lib/util";
 import { getNavigationConsts } from "../lib/settings";
-const { debounceScroll, alwaysShowArea } = getNavigationConsts();
+const { debounceScroll, alwaysShowArea, transparentNavTimeout } =
+  getNavigationConsts();
 
 interface IUseDarkMode {
   colorMode: string;
@@ -75,7 +76,10 @@ export function useHideNavigation(): IUseHideNavigation {
       setScrollDirection(direction);
       setActivityClass("active");
       if (direction === "show") {
-        t = setTimeout(() => setActivityClass("inactive"), 3000);
+        t = setTimeout(
+          () => setActivityClass("inactive"),
+          transparentNavTimeout
+        );
         return;
       }
     },

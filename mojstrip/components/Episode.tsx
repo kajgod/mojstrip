@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classnames from "classnames";
-import { getEpisode, IEpisode, IComic } from "../svc/episodes";
+import { getIssue, IIssue, IComic } from "../svc/episodes";
 import {
   getImagesCDN,
   getComicViewStyle,
@@ -74,11 +74,11 @@ const TitleAndPreface = ({
 };
 
 const Episode = ({ id }: { id?: number }) => {
-  const [episode, setEpisode] = useState<IEpisode | null>(null);
+  const [episode, setEpisode] = useState<IIssue | null>(null);
   const [maxWidth, setMaxWidth] = useState<number>(getDefaultComicWidth());
   useEffect(() => {
     (async () => {
-      const episode = await getEpisode(id);
+      const episode = await getIssue(id);
       setEpisode(episode);
       const maxWidth = getMaxWidth(episode);
       setMaxWidth(maxWidth);

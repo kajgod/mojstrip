@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "MojStrip #1",
+    "cover": "whatever.jpg",
+    "editorial": "<p>Ovo može biti bilo kakav HTML uvodnika</p>",
+    "date": "2015-01-01",
+    "stringDate": "siječanj 2015.",
+    "comics": [
+      {
+        "id": 1,
+        "slug": "darko-macan-perspektiva",
+        "title": "Perspektiva",
+        "author": "Darko Macan",
+        "episode": 1
+      },
+      {
+        "id": 2,
+        "slug": "jurica-staresincic-ironija",
+        "title": "Ironija",
+        "author": "Jurica Starešinčić",
+        "episode": 1
+      }
+    ]
+  }
+]

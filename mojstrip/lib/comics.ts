@@ -1,7 +1,7 @@
-import { IEpisode, IComic, IPage } from "../svc/episodes";
+import { IIssue, IComic, IPage } from "../svc/episodes";
 import { getDefaultComicWidth } from "./settings";
 
-export const getMaxWidth = (episode: IEpisode): number => {
+export const getMaxWidth = (episode: IIssue): number => {
   const { comics } = episode;
   const allPages = comics
     .reduce((acc: IPage[], comic) => {

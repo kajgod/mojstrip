@@ -1,4 +1,4 @@
-import episodes from "../data/episodes.json";
+import episodes from "../data/issues.json";
 
 export interface IPage {
   page: number;
@@ -13,28 +13,32 @@ export interface IPage {
 
 export interface IComic {
   id?: number;
+  slug: string;
   title: string;
   author: string;
-  pages: IPage[];
+  episode: number;
 }
 
-export interface IEpisode {
+export type IEpisode = IComic[];
+
+export interface IIssue {
   id: number;
   title: string;
   cover: string;
+  editorial: string;
   date: string;
-  description: string;
-  comics: IComic[];
+  stringDate: string;
+  episode: number;
 }
 
 /**
  * Get issue (episode) by number, and default tu most recent issue
  * @param id
- * @returns IEpisode
+ * @returns IIssue
  */
-export const getEpisode = async (
+export const getIssue = async (
   id: number = episodes.length
-): Promise<IEpisode> => {
+): Promise<IIssue> => {
   const episode = await import(`../data/episodes/${id}.json`);
   return episode;
 };

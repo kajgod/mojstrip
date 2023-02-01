@@ -43,15 +43,16 @@ const Comic = ({ title, author, pages, server }: IComicProps) => (
     <h2>{title}</h2>
     <h3>{author}</h3>
     <div className="pages">
-      {pages.map((page, index) => (
-        <Page
-          key={index}
-          src={server + page.url}
-          alt={page.alt}
-          width={page.width}
-          height={page.height}
-        />
-      ))}
+      {Array.isArray(pages) ??
+        pages.map((page, index) => (
+          <Page
+            key={index}
+            src={server + page.url}
+            alt={page.alt}
+            width={page.width}
+            height={page.height}
+          />
+        ))}
     </div>
   </div>
 );
@@ -73,14 +74,14 @@ const TitleAndPreface = ({
   return <div className="preface" dangerouslySetInnerHTML={html} />;
 };
 
-const Episode = ({ id }: { id?: number }) => {
-  const [episode, setEpisode] = useState<IIssue | null>(null);
+const Issue = ({ id }: { id?: number }) => {
+  const [issue, setIssue] = useState<IIssue | null>(null);
   const [maxWidth, setMaxWidth] = useState<number>(getDefaultComicWidth());
   useEffect(() => {
     (async () => {
-      const episode = await getIssue(id);
-      setEpisode(episode);
-      const maxWidth = getMaxWidth(episode);
+      const issue = await getIssue(id);
+      setIssue(issue);
+      const maxWidth = getMaxWidth(issue);
       setMaxWidth(maxWidth);
     })();
   }, [id]);
@@ -90,18 +91,18 @@ const Episode = ({ id }: { id?: number }) => {
       className={classnames("episode", getComicViewStyle())}
       style={{ width: maxWidth }}
     >
-      {episode && (
+      {issue && (
         <TitleAndPreface
-          title={episode.title}
-          cover={episode.cover}
-          description={episode.description}
+          title={issue.title}
+          cover={issue.cover}
+          description={issue.editorial}
         />
       )}
-      {episode?.comics.map((comic) => (
+      {issue?.comics.map((comic) => (
         <Comic key={comic.id} {...comic} maxWidth={maxWidth} server={server} />
       ))}
     </div>
   );
 };
 
-export default Episode;
+export default Issue;

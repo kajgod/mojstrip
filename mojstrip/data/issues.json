@@ -12,14 +12,18 @@
         "slug": "darko-macan-perspektiva",
         "title": "Perspektiva",
         "author": "Darko Macan",
-        "episode": 1
+        "episode": 1,
+        "preScript": "",
+        "postScript": ""
       },
       {
         "id": 2,
         "slug": "jurica-staresincic-ironija",
         "title": "Ironija",
         "author": "Jurica Starešinčić",
-        "episode": 1
+        "episode": 1,
+        "preScript": "",
+        "postScript": ""
       }
     ]
   }

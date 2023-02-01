@@ -2,7 +2,7 @@ import classnames from "classnames";
 import Head from "next/head";
 import Navigation from "../components/Navigation";
 import ToggleDark from "../components/ToggleDark";
-import Episode from "../components/Episode";
+import Issue from "../components/Issue";
 import { useDarkMode } from "../svc/service";
 import { setEnvironment } from "../lib/settings";
 
@@ -31,7 +31,7 @@ export default function Home({ env }: IInitialProps) {
           toggleDarkMode={toggleDarkMode}
           isMounted={isMounted}
         />
-        <Episode />
+        <Issue />
       </div>
     </>
   );

@@ -43,16 +43,15 @@ const Comic = ({ title, author, pages, server }: IComicProps) => (
     <h2>{title}</h2>
     <h3>{author}</h3>
     <div className="pages">
-      {Array.isArray(pages) ??
-        pages.map((page, index) => (
-          <Page
-            key={index}
-            src={server + page.url}
-            alt={page.alt}
-            width={page.width}
-            height={page.height}
-          />
-        ))}
+      {pages.map((page) => (
+        <Page
+          key={page.url}
+          src={server + page.url}
+          alt={page.alt}
+          width={page.width}
+          height={page.height}
+        />
+      ))}
     </div>
   </div>
 );

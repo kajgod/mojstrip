@@ -9,7 +9,6 @@ export const getMaxWidth = (issue: IIssue): number => {
   const allPages = comics
     .reduce((acc: IPage[], comic) => {
       const { pages } = comic;
-      console.log(comic);
       return [...acc, ...pages];
     }, [])
     .reduce((acc: number, page) => {

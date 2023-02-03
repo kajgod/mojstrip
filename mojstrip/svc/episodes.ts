@@ -11,11 +11,14 @@ export interface IPage {
   height: number;
 }
 
-export interface IComic {
-  id?: number;
+interface IComicMeta {
   slug: string;
   title: string;
   author: string;
+}
+
+export interface IComic extends IComicMeta {
+  id?: number;
   episode: number;
   preScript: string;
   postScript: string;
@@ -24,14 +27,21 @@ export interface IComic {
 
 export type IEpisode = IComic[];
 
-export interface IIssue {
+interface IIssueMeta {
   id: number;
   title: string;
   cover: string;
   editorial: string;
   date: string;
   stringDate: string;
+}
+
+export interface IIssue extends IIssueMeta {
   comics: IComic[];
+}
+
+export interface IArchiveIssue extends IIssueMeta {
+  comics: IComicMeta[];
 }
 
 /**
@@ -52,3 +62,5 @@ export const getIssue = async (id: number = issues.length): Promise<IIssue> => {
   }
   return issue;
 };
+
+export const getArchiveIssues = () => issues as IArchiveIssue[];

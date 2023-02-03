@@ -2,11 +2,22 @@
 const DEV_IMAGE_CDN = "http://localhost:3001";
 const PROD_IMAGE_CDN = "https://cdn.example.com";
 const DEFAULT_COMIC_WIDTH = 900;
-//#region navigation
+//#region navigation settings
 const DEBOUNCE_SCROLL = 25;
 const ALWAYS_SHOW_AREA = 500;
 const TRANSPARENT_NAV_TIMEOUT = 2000;
 //#endregion
+
+// texts
+interface ITitles {
+  [key: string]: string;
+}
+const titles: ITitles = {
+  titlePage: "Naslovnica",
+  archive: "Stariji brojevi",
+  about: "O nama",
+  contact: "Kontakt",
+};
 
 export interface INavigationConsts {
   debounceScroll: number;
@@ -51,3 +62,5 @@ export const getComicViewStyle = () => settings.viewStyle;
 export const getDefaultComicWidth = () => settings.defaultComicWidth;
 
 export const getNavigationConsts = (): INavigationConsts => settings.navigation;
+
+export const getTitleText = (key: string): string => titles[key] ?? "";

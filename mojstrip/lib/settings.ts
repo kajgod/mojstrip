@@ -14,8 +14,10 @@ interface ITitles {
 }
 const titles: ITitles = {
   titlePage: "Naslovnica",
-  archive: "Stariji brojevi",
-  about: "O nama",
+  archive: "Arhiva",
+  comics: "Stripovi",
+  authors: "Autori",
+  about: "Impressum",
   contact: "Kontakt",
 };
 

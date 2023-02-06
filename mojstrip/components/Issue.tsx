@@ -7,6 +7,7 @@ import {
   getDefaultComicWidth,
 } from "../lib/settings";
 import { getMaxWidth } from "../lib/comics";
+import Link from "next/link";
 
 interface IComicProps extends IComic {
   server: string;
@@ -38,10 +39,14 @@ const Page = ({ src, alt, width, height }: IPageProps) => (
   </div>
 );
 
-const Comic = ({ title, author, pages, server }: IComicProps) => (
+const Comic = ({ title, author, pages, server, slug }: IComicProps) => (
   <div className="comic">
-    <h2>{title}</h2>
-    <h3>{author}</h3>
+    <div className="title">
+      <h2>
+        <Link href={`strip/${slug}`}>{title}</Link>
+      </h2>
+      <h3>{author}</h3>
+    </div>
     <div className="pages">
       {pages.map((page) => (
         <Page

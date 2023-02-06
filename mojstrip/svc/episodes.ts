@@ -1,4 +1,13 @@
 import issues from "../data/issues.json";
+import authors from "../data/authors.json";
+
+export interface IAuthors {
+  [key: string]: {
+    name: string;
+    image: string;
+    bio: string;
+  };
+}
 
 export interface IPage {
   page: number;
@@ -15,6 +24,7 @@ interface IComicMeta {
   slug: string;
   title: string;
   author: string;
+  authorName: string;
 }
 
 export interface IComic extends IComicMeta {
@@ -59,6 +69,7 @@ export const getIssue = async (id: number = issues.length): Promise<IIssue> => {
       `../data/episodes/${comic.slug}/${comic.episode}.json`
     );
     comic.pages = pages?.default || [];
+    comic.authorName = (authors as IAuthors)[comic.author]?.name || "";
   }
   return issue;
 };

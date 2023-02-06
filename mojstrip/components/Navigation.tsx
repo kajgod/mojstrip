@@ -31,10 +31,13 @@ const Navigation = ({
             <Link href="/">Naslovnica</Link>
           </li>
           <li className="nav-link">
-            <Link href="/arhiva">Stariji brojevi</Link>
+            <Link href="/arhiva">Brojevi</Link>
           </li>
           <li className="nav-link">
-            <Link href="/mojstrip">O nama</Link>
+            <Link href="/strip">Stripovi</Link>
+          </li>
+          <li className="nav-link">
+            <Link href="/autori">Autori</Link>
           </li>
           <li className="nav-link">
             {isMounted && (

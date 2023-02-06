@@ -1,5 +1,19 @@
 .episode {
   width: min-content;
+  .title {
+    margin-top: 2rem;
+    text-align: center;
+    h2,
+    h3 {
+      display: inline;
+    }
+    h2 {
+      text-transform: uppercase;
+      &::after {
+        content: ", ";
+      }
+    }
+  }
   &.default {
     margin: var(--nav-height) auto var(--default-margin);
     max-width: var(--page-width);

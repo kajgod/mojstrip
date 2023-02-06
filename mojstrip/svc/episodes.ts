@@ -60,7 +60,7 @@ export interface IArchiveIssue extends IIssueMeta {
  * @returns IIssue
  */
 export const getIssue = async (id: number = issues.length): Promise<IIssue> => {
-  const issue = issues.find((i) => i.id === id) as IIssue;
+  const issue = structuredClone(issues.find((i) => i.id === id)) as IIssue; // clone to avoid mutation
   if (!issue) {
     throw new Error("Issue not found");
   }
@@ -74,4 +74,17 @@ export const getIssue = async (id: number = issues.length): Promise<IIssue> => {
   return issue;
 };
 
-export const getArchiveIssues = () => issues as IArchiveIssue[];
+export const getArchiveIssues = () => {
+  const archiveIssues = structuredClone(issues) as unknown;
+  (archiveIssues as IArchiveIssue[]).forEach((issue) => {
+    (issue.comics as unknown) = issue.comics.map((comic) => {
+      return {
+        slug: comic.slug,
+        title: comic.title,
+        author: comic.author,
+        authorName: (authors as IAuthors)[comic.author]?.name || "",
+      } as IComicMeta;
+    });
+  });
+  return archiveIssues;
+};

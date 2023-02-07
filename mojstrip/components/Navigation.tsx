@@ -21,24 +21,24 @@ const Navigation = ({
   const [isOpen, setOpen] = useState(false);
   const { visibilityClass, activitiyClass } = useHideNavigation();
   return (
-    <div className={classnames("navigation", visibilityClass, activitiyClass)}>
+    <header className={classnames("navigation", visibilityClass, activitiyClass)}>
       <nav className="container">
         <div className="logo">
           <Link href="/">MojStrip</Link>
         </div>
         <ul className={classnames("nav-links", isOpen && "active")}>
           <li className="nav-link">
-            <Link href="/">Naslovnica</Link>
+            <Link href="/">Novi broj</Link>
           </li>
           <li className="nav-link">
-            <Link href="/arhiva">Brojevi</Link>
+            <Link href="/arhiva">Stariji brojevi</Link>
           </li>
-          <li className="nav-link">
-            <Link href="/strip">Stripovi</Link>
-          </li>
-          <li className="nav-link">
-            <Link href="/autori">Autori</Link>
-          </li>
+          {/* <li className="nav-link"> */}
+          {/*   <Link href="/strip">Stripovi</Link> */}
+          {/* </li> */}
+          {/* <li className="nav-link"> */}
+          {/*   <Link href="/autori">Autori</Link> */}
+          {/* </li> */}
           <li className="nav-link">
             {isMounted && (
               <Toggler colorMode={colorMode} toggleDarkMode={toggleDarkMode} />
@@ -47,7 +47,7 @@ const Navigation = ({
         </ul>
         <Hamburger isOpen={isOpen} setOpen={setOpen} />
       </nav>
-    </div>
+    </header>
   );
 };
 

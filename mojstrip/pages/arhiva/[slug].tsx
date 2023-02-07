@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 import ToggleDark from "../../components/ToggleDark";
 import Issue from "../../components/Issue";
 import { useDarkMode } from "../../svc/service";
@@ -57,6 +58,7 @@ export default function ArchiveIssue({ slug, env }: IInitialProps) {
           isMounted={isMounted}
         />
         <Issue id={Number(slug)} />
+        <Footer />
       </div>
     </>
   );

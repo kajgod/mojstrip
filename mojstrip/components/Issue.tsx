@@ -40,12 +40,12 @@ const Page = ({ src, alt, width, height }: IPageProps) => (
 );
 
 const Comic = ({ title, author, pages, server, slug }: IComicProps) => (
-  <div className="comic">
+  <section className="comic">
     <div className="title">
       <h2>
         <Link href={`strip/${slug}`}>{title}</Link>
       </h2>
-      <h3>{author}</h3>
+      <h3 className="author">{author}</h3>
     </div>
     <div className="pages">
       {pages.map((page) => (
@@ -58,7 +58,7 @@ const Comic = ({ title, author, pages, server, slug }: IComicProps) => (
         />
       ))}
     </div>
-  </div>
+  </section>
 );
 
 const TitleAndPreface = ({
@@ -72,7 +72,7 @@ const TitleAndPreface = ({
         <img class="cover-image" src="${cover}" alt="${title}" />
         <h1>${title}</h1>
       </div>
-      <p>${description}</p>
+      <summary>${description}</summary>
    `,
   };
   return <div className="preface" dangerouslySetInnerHTML={html} />;
@@ -91,7 +91,7 @@ const Issue = ({ id }: { id?: number }) => {
   }, [id]);
   const server = getImagesCDN();
   return (
-    <div
+    <main
       className={classnames("episode", getComicViewStyle())}
       style={{ width: maxWidth }}
     >
@@ -105,7 +105,7 @@ const Issue = ({ id }: { id?: number }) => {
       {issue?.comics.map((comic) => (
         <Comic key={comic.id} {...comic} maxWidth={maxWidth} server={server} />
       ))}
-    </div>
+    </main>
   );
 };
 

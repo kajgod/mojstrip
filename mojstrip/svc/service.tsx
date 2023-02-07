@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import meta from "../data/meta.json";
 import { setSingleDataLine, getSingleDataLine } from "./user";
 import { debounce } from "../lib/util";
 import { getNavigationConsts } from "../lib/settings";
@@ -140,3 +141,5 @@ export function useHideNavigation(): IUseHideNavigation {
 
   return { visibilityClass: scrollDirection, activitiyClass };
 }
+
+export const getVersionNumber = () => meta.version;

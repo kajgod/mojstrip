@@ -86,5 +86,5 @@ export const getArchiveIssues = () => {
       } as IComicMeta;
     });
   });
-  return archiveIssues;
+  return archiveIssues as IArchiveIssue[];
 };

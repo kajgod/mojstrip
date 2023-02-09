@@ -88,3 +88,5 @@ export const getArchiveIssues = () => {
   });
   return archiveIssues as IArchiveIssue[];
 };
+
+export const getCurrentIssue = () => issues[issues.length - 1];

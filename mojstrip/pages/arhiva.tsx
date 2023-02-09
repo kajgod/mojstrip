@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import Head from "next/head";
 import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 import ToggleDark from "../components/ToggleDark";
 import Archive from "../components/Archive";
 import { useDarkMode } from "../svc/service";
@@ -32,6 +33,7 @@ export default function Home({ env }: IInitialProps) {
           isMounted={isMounted}
         />
         <Archive />
+        <Footer />
       </div>
     </>
   );

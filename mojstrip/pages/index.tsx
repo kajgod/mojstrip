@@ -1,25 +1,47 @@
 import classnames from "classnames";
 import Head from "next/head";
+import Meta from "../components/Meta";
 import Navigation from "../components/Navigation";
 import ToggleDark from "../components/ToggleDark";
 import Issue from "../components/Issue";
+import Footer from "../components/Footer";
 import { useDarkMode } from "../svc/service";
+import { getCurrentIssue } from "../svc/episodes";
 import { setEnvironment } from "../lib/settings";
 
-interface IInitialProps {
+interface IServerSideProps {
+  date: string;
+  title: string;
+  id: number;
+}
+
+interface IInitialProps extends IServerSideProps {
   env: string;
 }
 
-export default function Home({ env }: IInitialProps) {
+export const getServerSideProps = async () => {
+  const issue = getCurrentIssue();
+  return {
+    props: {
+      date: issue.date,
+      title: issue.title,
+      id: issue.id,
+    },
+  };
+};
+
+export default function Home({ env, date, title, id }: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
   setEnvironment(env);
   return (
     <>
       <Head>
-        <title>MojStrip</title>
-        <meta name="description" content="Strip časopis" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.png" />
+        <Meta
+          title={`${title} - crtani romani i stripovi`}
+          description="Čitaj stripove domaćih autora online i potpuno besplatno. Novi urednik, Darko Macan, dobro je poznata garancija kvalitete."
+          slug={"" + id}
+          timeString={date + " 08:00:00 +0000 UTC"}
+        />
       </Head>
       <div
         id="mojstrip"
@@ -32,6 +54,7 @@ export default function Home({ env }: IInitialProps) {
           isMounted={isMounted}
         />
         <Issue />
+        <Footer />
       </div>
     </>
   );

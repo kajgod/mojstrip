@@ -1,26 +1,47 @@
 import classnames from "classnames";
+import Meta from "../components/Meta";
 import Head from "next/head";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import ToggleDark from "../components/ToggleDark";
 import Archive from "../components/Archive";
 import { useDarkMode } from "../svc/service";
+import { getCurrentIssue } from "../svc/episodes";
 import { setEnvironment } from "../lib/settings";
 
-interface IInitialProps {
+interface IServerSideProps {
+  date: string;
+  title: string;
+  description: string;
+}
+
+interface IInitialProps extends IServerSideProps {
   env: string;
 }
 
-export default function Home({ env }: IInitialProps) {
+export const getStaticProps = async () => {
+  const issue = getCurrentIssue();
+  return {
+    props: {
+      date: issue.date,
+      title: "Arhiva stripova - MojStrip časopisa",
+      description: issue.editorial.replace(/(<([^>]+)>)/gi, ""),
+    },
+  };
+};
+
+export default function Home({ env, date, title, description }: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
   setEnvironment(env);
   return (
     <>
       <Head>
-        <title>MojStrip</title>
-        <meta name="description" content="Strip časopis" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.png" />
+        <Meta
+          title={title}
+          description={description}
+          slug="https://www.mojstrip.com/arhiva/"
+          timeString={date + " 08:00:00 +0000 UTC"}
+        />
       </Head>
       <div
         id="mojstrip"

@@ -7,7 +7,7 @@
     "servers": "npm run devserver & npm run cdnserver",
     "cdnserver": "echo \"Starting mock CDN\" && cd ../_gitignored/cdn/ && pwd && http-server -p 3001",
     "devserver": "echo \"Starting dev server\" && pwd && next dev",
-    "build": "NODE_ENV=production && next build && next export",
+    "build": "./prebuild.sh",
     "start": "next start",
     "lint": "next lint"
   },

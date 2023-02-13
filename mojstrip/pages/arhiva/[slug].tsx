@@ -1,14 +1,25 @@
 import classnames from "classnames";
+import Meta from "../../components/Meta";
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ToggleDark from "../../components/ToggleDark";
 import Issue from "../../components/Issue";
 import { useDarkMode } from "../../svc/service";
-import { getArchiveIssues, IArchiveIssue } from "../../svc/episodes";
+import {
+  getArchiveIssues,
+  getArchiveIssue,
+  IArchiveIssue,
+} from "../../svc/episodes";
 import { setEnvironment } from "../../lib/settings";
 
-interface IInitialProps {
+interface IServerSideProps {
+  date: string;
+  title: string;
+  description: string;
+}
+
+interface IInitialProps extends IServerSideProps {
   env: string;
   slug: string;
 }
@@ -18,9 +29,10 @@ interface IInitialProps {
 export async function getStaticPaths() {
   const issues = getArchiveIssues();
   const paths = issues.map((i: IArchiveIssue) => ({
-    params: { slug: String(i.id) },
+    params: {
+      slug: String(i.id),
+    },
   }));
-
   return {
     paths,
     fallback: false,
@@ -29,23 +41,37 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`
 // Called on build time 2nd
-export async function getStaticProps({ params }: { params: { slug: string } }) {
+export async function getStaticProps({ params }: { params: IInitialProps }) {
+  const i = getArchiveIssue(params.slug) as IArchiveIssue;
   return {
     // Passed to the page component as props
-    props: { slug: params.slug },
+    props: {
+      slug: params.slug,
+      date: i.date,
+      title: i.title,
+      description: i.editorial.replace(/(<([^>]+)>)/gi, ""),
+    },
   };
 }
 
-export default function ArchiveIssue({ slug, env }: IInitialProps) {
+export default function ArchiveIssue({
+  slug,
+  env,
+  date,
+  title,
+  description,
+}: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
   setEnvironment(env);
   return (
     <>
       <Head>
-        <title>MojStrip</title>
-        <meta name="description" content="Strip časopis" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.png" />
+        <Meta
+          title={`${title} - crtani romani i stripovi`}
+          description={description}
+          slug="https://www.mojstrip.com/arhiva/"
+          timeString={date + " 08:00:00 +0000 UTC"}
+        />
       </Head>
       <div
         id="mojstrip"

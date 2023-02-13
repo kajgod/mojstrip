@@ -89,4 +89,7 @@ export const getArchiveIssues = () => {
   return archiveIssues as IArchiveIssue[];
 };
 
+export const getArchiveIssue = (id: string) =>
+  getArchiveIssues().find((i) => i.id === Number(id));
+
 export const getCurrentIssue = () => issues[issues.length - 1];

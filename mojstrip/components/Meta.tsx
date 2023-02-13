@@ -15,18 +15,21 @@ const Meta = ({ title, description, slug, timeString }: IMeta) => (
       href="https://fonts.googleapis.com"
       crossOrigin="true"
     />
-    <link rel="canonical" href={`https://www.mojstrip.com/${slug}`} />
+    <link rel="canonical" href={slug} />
     <meta name="description" content={description} />
     <meta property="og:type" content={slug !== "" ? "article" : "website"} />
     <meta property="og:title" content={title} />
+    <meta property="og:url" content={slug} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="MojStrip časopis" />
+    <meta property="og:site_name" content={title} />
     <meta
       property="article:author"
       content="https://www.facebook.com/mojstrip"
     />
     <meta property="article:section" content="Arts & Entertainment" />
     <meta property="article:published_time" content={timeString} />
+    <meta property="og:locale" content="hr_HR" />
+    {/* Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices. */}
     {/* <meta */}
     {/*   property="og:image" */}
     {/*   content="https://smashingmagazine.com/images/smashing-homepage.png" */}

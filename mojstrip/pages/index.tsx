@@ -19,7 +19,7 @@ interface IInitialProps extends IServerSideProps {
   env: string;
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const issue = getCurrentIssue();
   return {
     props: {
@@ -39,7 +39,7 @@ export default function Home({ env, date, title, id }: IInitialProps) {
         <Meta
           title={`${title} - crtani romani i stripovi`}
           description="Čitaj stripove domaćih autora online i potpuno besplatno. Novi urednik, Darko Macan, dobro je poznata garancija kvalitete."
-          slug={"" + id}
+          slug={"https://www.mojstrip.com/arhiva/" + id}
           timeString={date + " 08:00:00 +0000 UTC"}
         />
       </Head>

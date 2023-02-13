@@ -26,5 +26,33 @@
         "postScript": ""
       }
     ]
+  },
+  {
+    "id": 2,
+    "title": "MojStrip #2",
+    "cover": "whatever.jpg",
+    "editorial": "<p>Ovo može biti bilo kakav HTML uvodnika</p>",
+    "date": "2015-02-01",
+    "stringDate": "veljača 2015.",
+    "comics": [
+      {
+        "id": 2,
+        "slug": "jurica-staresincic-ironija",
+        "title": "Ironija",
+        "author": "jurica-staresincic",
+        "episode": 1,
+        "preScript": "",
+        "postScript": ""
+      },
+      {
+        "id": 1,
+        "slug": "darko-macan-perspektiva",
+        "title": "Perspektiva",
+        "author": "darko-macan",
+        "episode": 1,
+        "preScript": "",
+        "postScript": ""
+      }
+    ]
   }
 ]

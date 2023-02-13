@@ -1,5 +1,5 @@
 .footer {
-  background: var(--foreground-color);
+  background: var(--black);
   margin-top: var(--default-margin);
   padding: var(--default-margin);
   text-align: center;
@@ -18,15 +18,22 @@
     color: var(--white);
     background: none;
   }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
   @media (min-width: 769px) {
-    li {
-      display: inline-block;
-      &:not(:last-child) {
-        margin-right: 1rem;
-        &:after {
-          content: "•";
-          margin-left: 1rem;
-          color: var(--highlight-color);
+    ul {
+      li {
+        display: inline-block;
+        &:not(:last-child) {
+          margin-right: 1rem;
+          &:after {
+            content: "•";
+            margin-left: 1rem;
+            color: var(--highlight-color);
+          }
         }
       }
     }

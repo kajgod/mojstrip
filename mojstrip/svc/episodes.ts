@@ -27,6 +27,12 @@ interface IComicMeta {
   authorName: string;
 }
 
+export interface IComicItem extends IComicMeta {
+  issueId: number;
+  issueName: string;
+  pages: number;
+}
+
 export interface IComic extends IComicMeta {
   id?: number;
   episode: number;
@@ -93,3 +99,24 @@ export const getArchiveIssue = (id: string) =>
   getArchiveIssues().find((i) => i.id === Number(id));
 
 export const getCurrentIssue = () => issues[issues.length - 1];
+
+export const getComicsList = async () => {
+  const comics = [] as IComicItem[];
+  for (const issue of issues) {
+    for (const comic of issue.comics) {
+      const pages = await import(
+        `../data/episodes/${comic.slug}/${comic.episode}.json`
+      );
+      comics.push({
+        slug: comic.slug,
+        title: comic.title,
+        author: comic.author,
+        authorName: (authors as IAuthors)[comic.author]?.name || "",
+        issueId: issue.id,
+        issueName: issue.title,
+        pages: pages?.default?.length || 0,
+      });
+    }
+  }
+  return comics;
+};

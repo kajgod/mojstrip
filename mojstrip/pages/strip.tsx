@@ -1,18 +1,19 @@
+import Link from "next/link";
 import classnames from "classnames";
 import Meta from "../components/Meta";
 import Head from "next/head";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import ToggleDark from "../components/ToggleDark";
-import Archive from "../components/Archive";
 import { useDarkMode } from "../svc/service";
-import { getCurrentIssue } from "../svc/episodes";
+import { getCurrentIssue, getComicsList, IComicItem } from "../svc/episodes";
 import { setEnvironment } from "../lib/settings";
 
 interface IServerSideProps {
   date: string;
   title: string;
   description: string;
+  comics: IComicItem[];
 }
 
 interface IInitialProps extends IServerSideProps {
@@ -21,16 +22,25 @@ interface IInitialProps extends IServerSideProps {
 
 export const getStaticProps = async () => {
   const issue = getCurrentIssue();
+  const comics = await getComicsList();
   return {
     props: {
       date: issue.date,
-      title: "Svi brojevi MojStrip časopisa",
-      description: issue.editorial.replace(/(<([^>]+)>)/gi, ""),
+      title: "Arhiva stripova - MojStrip časopis",
+      description:
+        "Najbolji stripovi najboljih autora za najbolje čitatelje! To može biti samo MojStrip :-)",
+      comics,
     },
   };
 };
 
-export default function Home({ env, date, title, description }: IInitialProps) {
+export default function Home({
+  env,
+  date,
+  title,
+  description,
+  comics,
+}: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
   setEnvironment(env);
   return (
@@ -53,7 +63,15 @@ export default function Home({ env, date, title, description }: IInitialProps) {
           toggleDarkMode={toggleDarkMode}
           isMounted={isMounted}
         />
-        <Archive />
+        {comics.map((comic) => (
+          <Link
+            className="comic-item"
+            key={comic.slug}
+            href={`/strip/${comic.slug}`}
+          >
+            {comic.title}
+          </Link>
+        ))}
         <Footer />
       </div>
     </>

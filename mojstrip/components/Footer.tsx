@@ -8,7 +8,7 @@ const Footer = () => (
         <Link href="/">Novi broj</Link>
       </li>
       <li className="nav-link">
-        <Link href="/arhiva">Stariji brojevi</Link>
+        <Link href="/arhiva">Svi brojevi</Link>
       </li>
       <li className="nav-link">
         <Link href="/strip">Stripovi</Link>

@@ -36,18 +36,18 @@
     "stringDate": "veljača 2015.",
     "comics": [
       {
-        "id": 2,
+        "id": 1,
         "slug": "jurica-staresincic-ironija",
         "title": "Ironija",
         "author": "jurica-staresincic",
-        "episode": 1,
+        "episode": 2,
         "preScript": "",
         "postScript": ""
       },
       {
-        "id": 1,
-        "slug": "darko-macan-perspektiva",
-        "title": "Perspektiva",
+        "id": 2,
+        "slug": "darko-macan-pisac",
+        "title": "Pisac",
         "author": "darko-macan",
         "episode": 1,
         "preScript": "",

@@ -123,3 +123,21 @@ export const getComicsList = async () => {
   }
   return comics;
 };
+
+export const getComic = async (slug: string): Promise<IComic> => {
+  const comic = structuredClone(
+    issues
+      .map((i) => i.comics)
+      .flat()
+      .find((c) => c.slug === slug)
+  ) as IComic;
+  if (!comic) {
+    throw new Error("Comic not found");
+  }
+  const pages = await import(
+    `../data/episodes/${comic.slug}/${comic.episode}.json`
+  );
+  comic.pages = pages?.default || [];
+  comic.authorName = (authors as IAuthors)[comic.author]?.name || "";
+  return comic;
+}

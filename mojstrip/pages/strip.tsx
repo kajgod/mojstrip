@@ -1,8 +1,8 @@
-import Link from "next/link";
 import classnames from "classnames";
 import Meta from "../components/Meta";
 import Head from "next/head";
 import Navigation from "../components/Navigation";
+import Comics from "../components/Comics";
 import Footer from "../components/Footer";
 import ToggleDark from "../components/ToggleDark";
 import { useDarkMode } from "../svc/service";
@@ -63,15 +63,7 @@ export default function Home({
           toggleDarkMode={toggleDarkMode}
           isMounted={isMounted}
         />
-        {comics.map((comic) => (
-          <Link
-            className="comic-item"
-            key={comic.slug}
-            href={`/strip/${comic.slug}`}
-          >
-            {comic.title}
-          </Link>
-        ))}
+        <Comics comics={comics} />
         <Footer />
       </div>
     </>

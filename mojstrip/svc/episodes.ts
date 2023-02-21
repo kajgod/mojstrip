@@ -102,8 +102,11 @@ export const getCurrentIssue = () => issues[issues.length - 1];
 
 export const getComicsList = async () => {
   const comics = [] as IComicItem[];
+  const alreadyContains = (c: string): boolean =>
+    Boolean(comics.find((v) => v.slug === c));
   for (const issue of issues) {
     for (const comic of issue.comics) {
+      if (alreadyContains(comic.slug)) continue;
       const pages = await import(
         `../data/episodes/${comic.slug}/${comic.episode}.json`
       );

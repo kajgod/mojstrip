@@ -7,9 +7,13 @@ import ToggleDark from "../../components/ToggleDark";
 import { useDarkMode } from "../../svc/service";
 import { getComicsList, getComic, IComicItem } from "../../svc/episodes";
 import { setEnvironment } from "../../lib/settings";
+import Comic from "../../components/Comic";
 
 interface IServerSideProps {
   pages: IComicItem[];
+  title: string;
+  authorName: string;
+  authorSlug: string;
 }
 
 interface IInitialProps extends IServerSideProps {
@@ -40,14 +44,25 @@ export async function getStaticProps({ params }: { params: IInitialProps }) {
     // Passed to the page component as props
     props: {
       slug: params.slug,
+      title: i.title,
+      authorName: i.authorName,
+      authorSlug: i.author,
       pages: i.pages,
     },
   };
 }
 
-export default function CompleteComic({ slug, env, pages }: IInitialProps) {
+export default function CompleteComic({
+  slug,
+  env,
+  pages,
+  title,
+  authorName,
+  authorSlug,
+}: IInitialProps) {
   const { colorMode, toggleDarkMode, isMounted } = useDarkMode();
   setEnvironment(env);
+
   return (
     <>
       <Head>
@@ -68,8 +83,12 @@ export default function CompleteComic({ slug, env, pages }: IInitialProps) {
           toggleDarkMode={toggleDarkMode}
           isMounted={isMounted}
         />
-        <div style={{ margin: "400px" }}>{slug}</div>
-        {JSON.stringify(pages)}
+        <Comic
+          title={title}
+          author={authorName}
+          pages={pages}
+          slug={slug}
+        />
         <Footer />
       </div>
     </>

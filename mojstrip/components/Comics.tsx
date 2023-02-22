@@ -6,7 +6,8 @@ const Comics = ({ comics }: { comics: IComicItem[] }) => (
       {comics.map((comic) => (
         <li key={comic.slug}>
           <Link className="comic-item" href={`/strip/${comic.slug}`}>
-            {comic.title}
+            <h2>{comic.title}</h2>
+            <h3>{comic.authorName}</h3>
           </Link>
         </li>
       ))}

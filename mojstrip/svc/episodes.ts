@@ -125,19 +125,24 @@ export const getComicsList = async () => {
 };
 
 export const getComic = async (slug: string): Promise<IComic> => {
-  const comic = structuredClone(
+  const comicElements = structuredClone(
     issues
       .map((i) => i.comics)
       .flat()
-      .find((c) => c.slug === slug)
-  ) as IComic;
+      .filter((c) => c.slug === slug)
+  );
+
+  const comic = comicElements[0] as IComic;
+
   if (!comic) {
     throw new Error("Comic not found");
   }
-  const pages = await import(
-    `../data/episodes/${comic.slug}/${comic.episode}.json`
-  );
-  comic.pages = pages?.default || [];
+
+  comic.pages = [] as IPage[];
+  comicElements.forEach(async (c) => {
+    const pages = await import(`../data/episodes/${c.slug}/${c.episode}.json`);
+    comic.pages.push(...(pages?.default || []));
+  });
   comic.authorName = (authors as IAuthors)[comic.author]?.name || "";
   return comic;
-}
+};

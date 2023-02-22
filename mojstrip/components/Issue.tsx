@@ -1,65 +1,15 @@
 import { useEffect, useState } from "react";
 import classnames from "classnames";
-import { getIssue, IIssue, IComic } from "../svc/episodes";
-import {
-  getImagesCDN,
-  getComicViewStyle,
-  getDefaultComicWidth,
-} from "../lib/settings";
+import { getIssue, IIssue } from "../svc/episodes";
+import { getComicViewStyle, getDefaultComicWidth } from "../lib/settings";
 import { getMaxWidth } from "../lib/comics";
-import Link from "next/link";
-
-interface IComicProps extends IComic {
-  server: string;
-  maxWidth: number;
-}
-
-interface IPageProps {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import Comic from "./Comic";
 
 interface ITitleAndPrefaceProps {
   title: string;
   cover: string;
   description: string;
 }
-
-const Page = ({ src, alt, width, height }: IPageProps) => (
-  <div className="comic-page">
-    <img
-      className="comic-image"
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-    />
-  </div>
-);
-
-const Comic = ({ title, author, pages, server, slug }: IComicProps) => (
-  <section className="comic">
-    <div className="title">
-      <h2>
-        <Link href={`strip/${slug}`}>{title}</Link>
-      </h2>
-      <h3 className="author">{author}</h3>
-    </div>
-    <div className="pages">
-      {pages.map((page) => (
-        <Page
-          key={page.url}
-          src={server + page.url}
-          alt={page.alt}
-          width={page.width}
-          height={page.height}
-        />
-      ))}
-    </div>
-  </section>
-);
 
 const TitleAndPreface = ({
   title,
@@ -89,7 +39,6 @@ const Issue = ({ id }: { id?: number }) => {
       setMaxWidth(maxWidth);
     })();
   }, [id]);
-  const server = getImagesCDN();
   return (
     <main
       className={classnames("episode", getComicViewStyle())}
@@ -103,7 +52,7 @@ const Issue = ({ id }: { id?: number }) => {
         />
       )}
       {issue?.comics.map((comic) => (
-        <Comic key={comic.id} {...comic} maxWidth={maxWidth} server={server} />
+        <Comic key={comic.id} {...comic} maxWidth={maxWidth} />
       ))}
     </main>
   );

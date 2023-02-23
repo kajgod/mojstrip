@@ -5,12 +5,12 @@ import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ToggleDark from "../../components/ToggleDark";
 import { useDarkMode } from "../../svc/service";
-import { getComicsList, getComic, IComicItem } from "../../svc/episodes";
+import { getComicsList, getComic, IComicItem, IPage } from "../../svc/episodes";
 import { setEnvironment } from "../../lib/settings";
 import Comic from "../../components/Comic";
 
 interface IServerSideProps {
-  pages: IComicItem[];
+  pages: IPage[];
   title: string;
   authorName: string;
   authorSlug: string;
@@ -86,8 +86,13 @@ export default function CompleteComic({
         <Comic
           title={title}
           author={authorName}
+          authorName={authorName}
           pages={pages}
           slug={slug}
+          preScript=""
+          postScript=""
+          maxWidth={800}
+          episode={0}
         />
         <Footer />
       </div>

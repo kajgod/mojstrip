@@ -13,6 +13,7 @@ const Page = ({ src, alt, width, height }: IPageProps) => (
       alt={alt}
       width={width}
       height={height}
+      loading="lazy"
     />
   </div>
 );
